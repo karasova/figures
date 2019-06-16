@@ -27,7 +27,7 @@ public:
 	}
 
 	string name(){
-		return "Круг";
+		return "ГЉГ°ГіГЈ";
 	}
 
 	double area(){
@@ -54,7 +54,7 @@ public:
 	}
 
 	string name() {
-		return "Треугольник";
+		return "Г’Г°ГҐГіГЈГ®Г«ГјГ­ГЁГЄ";
 	}
 
 	double area() {
@@ -78,7 +78,7 @@ public:
 	}
 
 	string name() {
-		return "Прямоугольник";
+		return "ГЏГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­ГЁГЄ";
 	}
 
 	double area() {
@@ -91,4 +91,47 @@ public:
 
 private:
 	T a, b;
+};
+
+template <class T> class Poligon : public Figure {
+public:
+	Poligon() {}
+
+	void setDot(T x, T y) {
+		Point<T> d;
+		d.x = x;
+		d.y = y;
+
+		dots.push_back(d);
+	}
+
+	string name() {
+		return "РџРѕР»РёРіРѕРЅ";
+	}
+
+	double area() {
+		double area = 0;
+
+		for (int i = 0; i < dots.size() - 2; i++) {
+			area += ((dots[i + 1].x - dots[0].x) * (dots[i + 2].y - dots[0].y)) - ((dots[i + 1].y - dots[0].y) * (dots[i + 2].x - dots[0].x));
+		}
+
+		return abs(area) / 2;
+	}
+
+	double per() {
+		double per = 0;
+
+		for (int i = 0; i < dots.size() - 1; i++) {
+			per += sqrt((dots[i + 1].x - dots[i].x) * (dots[i + 1].x - dots[i].x) + (dots[i + 1].y - dots[i].y) * (dots[i + 1].y - dots[i].y));
+		}
+
+		per += sqrt((dots[dots.size() - 1].x - dots[0].x) * (dots[dots.size() - 1].x - dots[0].x) + (dots[dots.size() - 1].y - dots[0].y) * (dots[dots.size() - 1].y - dots[0].y));
+
+		return per;
+	}
+
+
+private:
+	vector<Point<T>> dots;
 };
